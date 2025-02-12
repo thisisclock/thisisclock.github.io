@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful HTML Clock</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+    <style>
+        body.dark-theme {
+            font-family: 'Roboto Mono', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .clock.dark-theme {
+            font-size: 14rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(34, 34, 34, 0.9);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .clock.dark-theme:hover {
+            transform: scale(1.05);
+        }
+
+        .digit, .colon, .period {
+            margin: 0 5px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .digit.dark-theme {
+            width: 140px;
+            height: 200px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+            font-size: 8rem;
+            transition: transform 0.2s;
+        }
+
+        .digit.dark-theme:hover {
+            transform: scale(1.1);
+        }
+
+        .colon.dark-theme, .period.dark-theme {
+            font-size: 14rem;
+        }
+
+        .period.dark-theme {
+            font-size: 2rem;
+            align-self: flex-end;
+            margin-bottom: 20px;
+            color: #ffffff;
+            padding-left: 10px;
+            padding-bottom: 25px;
+            transition: transform 0.2s;
+        }
+
+        .period.dark-theme:hover {
+            transform: scale(1.05);
+        }
+
+        .digit {
+            width: 140px;
+            height: 200px;
+            font-size: 15rem; /* Increased font size for bigger text */
+            text-size-adjust: 500%;
+        }
+
+        .apm {
+            width: 140px;
+            height: 200px;
+            font-size: 5rem; /* Increased font size for bigger text */
+            text-size-adjust: 500%;
+        }
+
+        button {
+            font-size: 1.5rem;
+            color: #fafafa;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid #fafafa;
+            background: #252525;
+            box-shadow: 3px 3px #fafafa;
+            cursor: pointer;
+            margin: 35px 0;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            background-color: #444;
+        }
+
+        button:active {
+            box-shadow: none;
+            transform: translate(3px, 3px);
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <div class="clock" id="clock">
+        <span class="digit" id="hours-tens">0</span>
+        <span class="digit" id="hours-ones">0</span>
+        <span class="digit">:</span>
+        <span class="digit" id="minutes-tens">0</span>
+        <span class="digit" id="minutes-ones">0</span>
+        <span class="digit">:</span>
+        <span class="digit" id="seconds-tens">0</span>
+        <span class="digit" id="seconds-ones">0</span>
+        <span class="apm" id="period">AM</span>
+    </div>
+    <footer style="position: absolute; bottom: -500px; width: 100%; text-align: center;">
+        <p>A part of the cheesecake project</p>
+        <p>Feel free to use this clock under the MIT license</p>
+        <button class="cssbuttons-io" onclick="window.location.href='https://github.com/sun532818microbit/Clock'">Repo link</button>
+    </footer>
+    <script>
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const period = hours >= 12 ? 'PM' : 'AM';
+
+            hours = hours % 12 || 12; // Convert to 12-hour format
+            const hoursString = String(hours).padStart(2, '0');
+
+            document.getElementById('hours-tens').textContent = hoursString[0];
+            document.getElementById('hours-ones').textContent = hoursString[1];
+            document.getElementById('minutes-tens').textContent = minutes[0];
+            document.getElementById('minutes-ones').textContent = minutes[1];
+            document.getElementById('seconds-tens').textContent = seconds[0];
+            document.getElementById('seconds-ones').textContent = seconds[1];
+            document.getElementById('period').textContent = period;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
