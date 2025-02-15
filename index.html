@@ -129,8 +129,20 @@
     <footer style="position: absolute; bottom: -500px; width: 100%; text-align: center;">
         <p>A part of the cheesecake project</p>
         <p>Feel free to use this clock under the MIT license</p>
+        <button onclick="togglefullscreen">Toggle full screen</button>
     </footer>
     <script>
+        function togglefullscreen()
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
         function updateClock() {
             const now = new Date();
             let hours = now.getHours();
