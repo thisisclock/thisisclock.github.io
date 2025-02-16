@@ -90,27 +90,53 @@
             text-size-adjust: 500%;
         }
 
-        button {
-            font-size: 1.5rem;
-            color: #fafafa;
+        .btn {
+            position: relative;
+            font-size: 17px;
             text-transform: uppercase;
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: 2px solid #fafafa;
-            background: #252525;
-            box-shadow: 3px 3px #fafafa;
+            text-decoration: none;
+            padding: 1em 2.5em;
+            display: inline-block;
             cursor: pointer;
-            margin: 35px 0;
-            transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+            border-radius: 6em;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+            color: black;
+            background-color: white;
         }
 
-        button:hover {
-            background-color: #444;
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        button:active {
-            box-shadow: none;
-            transform: translate(3px, 3px);
+        .btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn::after {
+            content: "";
+            display: inline-block;
+            height: 100%;
+            width: 100%;
+            border-radius: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all 0.4s;
+        }
+
+        .btn::after {
+            background-color: #fff;
+        }
+
+        .btn:hover::after {
+            transform: scaleX(1.4) scaleY(1.6);
+            opacity: 0;
         }
     </style>
 </head>
@@ -129,7 +155,7 @@
     <footer style="position: absolute; bottom: -500px; width: 100%; text-align: center;">
         <p>A part of the cheesecake project</p>
         <p>Feel free to use this clock under the MIT license</p>
-        <button onclick="toggleFullscreen()">Toggle full screen</button>
+        <button class="btn" onclick="toggleFullscreen()">Toggle full screen</button>
     </footer>
     <script>
         function toggleFullscreen() {
